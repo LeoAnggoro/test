@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+
 import propTypes from 'prop-types'
 
 export default function Button(props) {
@@ -78,6 +79,7 @@ Button.propTypes = {
     href: propTypes.string,
     target: propTypes.string,
     className: propTypes.string,
+    isExternal: propTypes.bool,
     isDisable: propTypes.bool,
     isLoading: propTypes.bool,
     isSmall: propTypes.bool,
