@@ -16,7 +16,8 @@
   user-select: none;
   background-color: transparent;
   border: $btn-border-width solid transparent;
-  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
+  min-height: 50px;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, 4px);
   @include transition($btn-transition);
 
   &:hover {
@@ -40,7 +41,12 @@
       @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
     }
   }
+  &.btn-shadow {
+    box-shadow: 0px 8px 15px rgba($primary, 0.3); 
+  }
 
+
+  
   &:disabled,
   &.disabled,
   fieldset:disabled & {
