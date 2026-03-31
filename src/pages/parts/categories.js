@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import Button from 'elements/Button';
 
 export default function Categories({ data }) {
@@ -6,7 +7,17 @@ export default function Categories({ data }) {
   return data.map((category, index) => {
     return (
       <section className="container" key={`category-${index}`}>
-        <h4 className="mb-3 font-weight-medium">{category.name}</h4>
+        {/* Animasi Judul Kategori */}
+        <motion.h4 
+          className="mb-3 font-weight-medium"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          {category.name}
+        </motion.h4>
+
         <div className="container-grid">
           {category.items.length === 0 ? (
             <div className="row">
@@ -17,9 +28,14 @@ export default function Categories({ data }) {
           ) : (
             category.items.map((item, index2) => {
               return (
-                <div
-                  className="item column-3 row1"
+                <motion.div
+                  className="item column-3 row-1"
                   key={`category-${index}-item-${index2}`}
+                  // Efek Fading bertahap (Staggered)
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index2 * 0.1 }}
+                  viewport={{ once: true }}
                 >
                   <div className="card">
                     {item.isPopular && (
@@ -47,7 +63,7 @@ export default function Categories({ data }) {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })
           )}

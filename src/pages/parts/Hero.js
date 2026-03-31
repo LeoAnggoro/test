@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'elements/Button';
+import { motion } from 'framer-motion';
 
 import ImageHero from 'assets/images/Img-hero.png'
 import ImageHero_ from 'assets/images/Img-hero-frame.png'
@@ -8,6 +9,7 @@ import IconTraveler from 'assets/images/icon/Icon-treveler.svg';
 import IconTreasure from 'assets/images/icon/Icon-treasure.svg';
 
 import formatNumber from 'utilis/formatNumber'
+
 export default function Hero(props) { 
   function showMostPicked() {
     window.scrollTo({
@@ -16,16 +18,26 @@ export default function Hero(props) {
     });
   }
 
-
   return (
+    // Gunakan Fragment <> untuk membungkus jika ada elemen sejajar, 
+    // tapi di sini cukup pakai satu <section> utama agar rapi.
     <section className="container pt-4">
       <div className="row align-items-center">
-        <div className="col-auto pr-5" style={{ width: 530 }}>
+        
+        {/* Efek Fading & Slide Up untuk Teks (Sisi Kiri) */}
+        <motion.div 
+          className="col-auto pr-5" 
+          style={{ width: 530 }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
           <h1 className="font-weight-bold line-height-1 mb-3">
             Discover Your Home, <br /> Away From Home.
           </h1>
           <p className="mb-4 font-weight-light text-gray-500 w-75" style={{lineHeight:"170%"}}>
-            Experience the comfort of home with the luxury of a vacation. We curate the best local stays to ensure your getaway is as cozy as it is unforgettable. Your perfect escape is closer than you think
+            Experience the comfort of home with the luxury of a vacation. We curate the best local stays to ensure your getaway is as cozy as it is unforgettable. Your perfect escape is closer than you think.
           </p>
 
           <Button className="btn px-5" hasShadow isPrimary onClick={showMostPicked}>
@@ -54,45 +66,47 @@ export default function Hero(props) {
               </h6>
             </div>
           </div>
-        </div>
+        </motion.div>
         
-        {/* GUNAKAN col-6 agar layar terbagi 50:50, gambar tidak meluber ke kiri */}
-        <div className="col-6">
-  {/* Container utama kolom kanan, kita beri display flex */}
-  <div className="d-flex justify-content-end" style={{ width: "100%" }}>
-    
-    {/* Wrapper gambar dengan ukuran tetap, ditarik ke kanan oleh d-flex */}
-    <div className="position-relative" style={{ width: 480, height: 380 }}> 
-      <img 
-        src={ImageHero} 
-        alt="Room" 
-        className="img-fluid position-absolute" 
-        style={{ 
-          top: -30, 
-          left: 125, 
-          zIndex: 2, 
-          objectFit: 'cover',
-          borderRadius: "100px 15px 15px 15px"
-        }} 
-      />
-      <img 
-        src={ImageHero_} 
-        alt="Frame" 
-        className="img-fluid position-absolute" 
-        style={{ 
-          top: 0,
-          left: 150,
-          zIndex: 1,
-          objectFit: 'cover',
-          borderRadius: "15px"
-        }} 
-      />
-    </div>
+        {/* Efek Fading untuk Gambar (Sisi Kanan) */}
+        <motion.div 
+          className="col-6"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="d-flex justify-content-end" style={{ width: "100%" }}>
+            <div className="position-relative" style={{ width: 480, height: 380 }}> 
+              <img 
+                src={ImageHero} 
+                alt="Room" 
+                className="img-fluid position-absolute" 
+                style={{ 
+                  top: -30, 
+                  left: 125, 
+                  zIndex: 2, 
+                  objectFit: 'cover',
+                  borderRadius: "100px 15px 15px 15px"
+                }} 
+              />
+              <img 
+                src={ImageHero_} 
+                alt="Frame" 
+                className="img-fluid position-absolute" 
+                style={{ 
+                  top: 0,
+                  left: 150,
+                  zIndex: 1,
+                  objectFit: 'cover',
+                  borderRadius: "15px"
+                }} 
+              />
+            </div>
+          </div>
+        </motion.div>
 
-  </div>
-</div>
-</div>
+      </div>
     </section>
-    
   );
 }
